@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('layouts/header') -%>
+
+    <body>
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-dark text-light p-0">
+            <div class="row gx-0 d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-map-marker-alt text-primary me-2"></small>
+                        <small>123 Street, New York, USA</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center">
+                        <small class="far fa-clock text-primary me-2"></small>
+                        <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                    </div>
+                </div>
+                <div class="col-lg-5 px-5 text-end">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-phone-alt text-primary me-2"></small>
+                        <small>+012 345 6789</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center mx-n2">
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+
+        <!-- Navbar Start -->
+        <%- include ('layouts/navbar') -%>
+            <!-- Navbar End -->
+
+
+            <!-- Registration Form Start -->
+            <div class="container-xxl py-6">
+                <div class="container">
+                    <div class="row g-5">
+                        <div class="col-lg-6 offset-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                            <h6 class="text-primary text-uppercase mb-2">Register</h6>
+                            <h1 class="display-6 mb-4">Create Your Account</h1>
+                            <form id="g2Form" action="/addUser" method="post">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="firstname"
+                                                name="firstname" placeholder="First Name" required>
+                                            <label for="firstname">First Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="lastname"
+                                                name="lastname" placeholder="Last Name" required>
+                                            <label for="lastname">Last Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="licenseNo"
+                                                name="licenseNo" placeholder="License Number" pattern="[A-Za-z0-9]{8}"
+                                                title="8 characters, alphanumeric" required>
+                                            <label for="licenseNo">License Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control border-0 bg-light" id="age"
+                                                name="age" placeholder="Age" min="1" max="120" required>
+                                            <label for="age">Age</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h5>Car Details</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="carMake"
+                                                name="carMake" placeholder="Car Make" required>
+                                            <label for="carMake">Car Make</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="carModel"
+                                                name="carModel" placeholder="Car Model" required>
+                                            <label for="carModel">Car Model</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control border-0 bg-light" id="carYear"
+                                                name="carYear" placeholder="Car Year" min="1886" max="2024" required>
+                                            <label for="carYear">Car Year</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="plateNumber"
+                                                name="plateNumber" placeholder="Plate Number" required>
+                                            <label for="plateNumber">Plate Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary py-3 px-5" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Registration Form End -->
+
+
+            <!-- Footer Start -->
+            <%- include ('layouts/footer') -%>
+
+                <!-- JavaScript Libraries -->
+                <%- include ('layouts/script') -%>
+
+    </body>
+
+</html>
