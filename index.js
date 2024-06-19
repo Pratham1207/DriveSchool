@@ -46,6 +46,11 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.get("/register", (req, res) => {
+  // res.sendFile(path.join(__dirname, "public/register.html"));
+  res.render("register");
+});
+
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
