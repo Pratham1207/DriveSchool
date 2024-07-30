@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+    <a href="/" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+        <h2 class="m-0"><i class="fa fa-car text-primary me-2"></i>DrivePro</h2>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+
+            <% if (loggedIn && userType==='Driver' ) { %>
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/G2" class="nav-item nav-link">G2 Test</a>
+                <a href="/G" class="nav-item nav-link">G Test</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= username %>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                    </ul>
+                </li>
+                <% } else if (loggedIn && userType==='Admin' ) { %>
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/appointment" class="nav-item nav-link">Management Appointment</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= username %>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                    <% } else { %>
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/login" class="nav-item nav-link">Login</a>
+                        <% } %>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-dark text-light p-0">
+            <div class="row gx-0 d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-map-marker-alt text-primary me-2"></small>
+                        <small>123 Street, New York, USA</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center">
+                        <small class="far fa-clock text-primary me-2"></small>
+                        <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                    </div>
+                </div>
+                <div class="col-lg-5 px-5 text-end">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-phone-alt text-primary me-2"></small>
+                        <small>+012 345 6789</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center mx-n2">
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <%- include('layouts/navbar') -%>
+            <!-- Navbar End -->
+
+            <!-- G2 Booking Start -->
+            <div class="container-xxl py-6">
+                <div class="container">
+                    <div class="row g-5">
+                        <div class="col-lg-6 offset-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                            <h6 class="text-primary text-uppercase mb-2">G2 Test</h6>
+                            <h1 class="display-6 mb-4">Book Your G2 Test</h1>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control border-0 bg-light" id="calendar"
+                                            name="calendar" placeholder="Select Date" required
+                                            min="<%= new Date().toISOString().split('T')[0] %>" />
+                                        <label for="calendar">Select Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <div class="available-slots" id="slots-container">
+                                            <!-- Available slots will be populated here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button id="book-appointment" class="btn btn-primary py-3 px-5">Book
+                                        Appointment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- G2 Booking End -->
+
+            <!-- Footer Start -->
+            <%- include('layouts/footer') -%>
+
+                <!-- JavaScript Libraries -->
+                <%- include('layouts/script') -%>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            let selectedDate = null;
+                            let selectedTime = null;
+
+                            $("#calendar").change(function () {
+                                selectedDate = $(this).val();
+                                fetchAvailableSlots(selectedDate);
+                            });
+
+                            function fetchAvailableSlots(date) {
+                                $.get(`/g2/slots/${date}`, function (data) {
+                                    let slotsContainer = $("#slots-container");
+                                    slotsContainer.empty();
+                                    data.slots.forEach((slot) => {
+                                        if (slot.isTimeSlotAvailable) {
+                                            slotsContainer.append(
+                                                `<button type="button" class="btn btn-primary m-1" onclick="selectSlot('${slot.time}')">${slot.time}</button>`
+                                            );
+                                        }
+                                    });
+                                });
+                            }
+
+                            window.selectSlot = function (time) {
+                                selectedTime = time;
+                                alert(`You have selected ${time} on ${selectedDate}. Click "Book Appointment" to confirm.`);
+                            };
+
+                            $("#book-appointment").click(function () {
+                                if (selectedDate && selectedTime) {
+                                    confirmBooking(selectedDate, selectedTime);
+                                } else {
+                                    alert("Please select a date and time slot.");
+                                }
+                            });
+
+                            function confirmBooking(date, time) {
+                                if (confirm(`Do you want to book this slot on ${date} at ${time}?`)) {
+                                    bookSlot(date, time);
+                                }
+                            }
+
+                            function bookSlot(date, time) {
+                                $.post("/g2/book", { date, time }, function (response) {
+                                    if (response.success) {
+                                        alert(response.message);
+                                        fetchAvailableSlots(date); // Refresh available slots
+                                    } else {
+                                        alert(response.message);
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+    </body>
+
+</html>
