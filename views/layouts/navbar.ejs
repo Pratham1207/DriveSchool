@@ -35,6 +35,19 @@
                             <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
                         </ul>
                     </li>
+                <% } else if (loggedIn && userType==='Examiner' ) { %>
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/examiner" class="nav-item nav-link">Examiner</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= username %>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </li>
                     <% } else { %>
                         <a href="/" class="nav-item nav-link">Home</a>
                         <a href="/login" class="nav-item nav-link">Login</a>

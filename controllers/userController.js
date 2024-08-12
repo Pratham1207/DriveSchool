@@ -1,5 +1,6 @@
 // Import User model
 const User = require("../models/User");
+const Appointment = require("../models/Appointment");
 
 // Update user's details
 exports.updateUser = async (req, res) => {

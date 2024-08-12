@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Appointment = require("../models/Appointment");
 
 // Render the index page
 exports.renderIndex = (req, res) => {
@@ -108,5 +109,19 @@ exports.bookSlot = async (req, res) => {
   } catch (error) {
     // send internal server error
     res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+exports.renderExaminer = async (req, res) => {
+  try {
+    const appointments = await Appointment.find(); // Fetch all appointments
+    res.render("examiner", {
+      layout: "examiner",
+      title: "Examiner",
+      appointments,
+    }); // Pass 'appointments' to the EJS template
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 };

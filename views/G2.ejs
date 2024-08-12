@@ -92,17 +92,13 @@
                             let selectedDate = null;
                             let selectedTime = null;
 
-                            $("#calendar").change(function () {
-                                selectedDate = $(this).val();
-                                fetchAvailableSlots(selectedDate);
-                            });
-
                             function fetchAvailableSlots(date) {
                                 $.get(`/g2/slots/${date}`, function (data) {
                                     let slotsContainer = $("#slots-container");
                                     slotsContainer.empty();
                                     data.slots.forEach((slot) => {
                                         if (slot.isTimeSlotAvailable) {
+                                            console.log(data);
                                             slotsContainer.append(
                                                 `<button type="button" class="btn btn-primary m-1" onclick="selectSlot('${slot.time}')">${slot.time}</button>`
                                             );
@@ -110,6 +106,13 @@
                                     });
                                 });
                             }
+
+                            $("#calendar").change(function () {
+                                selectedDate = $(this).val();
+                                fetchAvailableSlots(selectedDate);
+                            });
+
+
 
                             window.selectSlot = function (time) {
                                 selectedTime = time;
@@ -120,6 +123,7 @@
                                 if (selectedDate && selectedTime) {
                                     confirmBooking(selectedDate, selectedTime);
                                 } else {
+
                                     alert("Please select a date and time slot.");
                                 }
                             });
