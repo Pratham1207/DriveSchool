@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('partials/_header') -%>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <%- include ('partials/_navbar') -%>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+
+                <!-- partial -->
+                <!-- partial:partials/_sidebar.html -->
+                <%- include ('partials/_sidebar') -%>
+
+                    <!-- partial -->
+                    <div class="main-panel">
+                        <div class="content-wrapper">
+                            <div class="row">
+                                <div class="col-md-12 grid-margin">
+                                    <div class="row">
+                                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                            <h3 class="font-weight-bold">Welcome, <%= username %>!</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p class="card-title mb-0">Appointments</p>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-borderless">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>User</th>
+                                                            <th>Test Type</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% let totalUsers=users.length; %>
+                                                            <% users.forEach(user=> { %>
+                                                                <tr>
+                                                                    <td>
+                                                                        <%= user.firstname %>
+                                                                            <%= user.lastname %>
+                                                                    </td>
+                                                                    <td class="font-weight-bold">
+                                                                        <%= user.testType %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= user.appointmentDate %>
+                                                                    </td>
+                                                                    <td class="font-weight-medium">
+                                                                        <div
+                                                                            class="badge 
+                                                                        <%= user.passFail === null ? 'badge-warning' : 
+                                                                             user.passFail ? 'badge-success' : 'badge-danger' %>">
+                                                                            <%= user.passFail===null ? 'Pending' :
+                                                                                user.passFail ? 'Pass' : 'Fail' %>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <% }) %>
+                                                                    <tr>
+                                                                        <td colspan="4"
+                                                                            class="font-weight-bold text-right">
+                                                                            Total Users: <%= totalUsers %>
+                                                                        </td>
+                                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <%- include ('partials/_footer') -%>
+                    </div>
+            </div>
+    </div>
+
+    <%- include ('partials/_scripts') -%>
+</body>
+
+</html>
