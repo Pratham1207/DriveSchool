@@ -17,6 +17,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
  * request body. The user must be logged in to access this route.
  */
 router.post("/updateUser", authMiddleware, userController.updateUser);
+router.post("/updateGUser", authMiddleware, userController.updateGUser);
 
 /**
  * Get a user

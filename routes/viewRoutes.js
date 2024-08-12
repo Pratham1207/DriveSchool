@@ -4,6 +4,7 @@ const router = express.Router();
 const viewController = require("../controllers/viewController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const adminMiddleware = require("../middlewares/adminMiddleware");
+const examinerMiddleware = require("../middlewares/examinerMiddleware");
 const redirectIfAuthenticatedMiddleware = require("../middlewares/redirectIfAuthenticatedMiddleware");
 
 // Render the index page
@@ -34,6 +35,8 @@ router.get("/profile", authMiddleware, viewController.renderProfile);
 
 // Render the appointment page, which requires admin privileges
 router.get("/appointment", adminMiddleware, viewController.renderAppointment);
+
+router.get("/examiner", examinerMiddleware, viewController.renderExaminer);
 
 router.get("/slots/:date", viewController.getAvailableSlots);
 
