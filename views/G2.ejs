@@ -53,27 +53,84 @@
                         <div class="col-lg-6 offset-lg-3 wow fadeInUp" data-wow-delay="0.1s">
                             <h6 class="text-primary text-uppercase mb-2">G2 Test</h6>
                             <h1 class="display-6 mb-4">Book Your G2 Test</h1>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control border-0 bg-light" id="calendar"
-                                            name="calendar" placeholder="Select Date" required
-                                            min="<%= new Date().toISOString().split('T')[0] %>" />
-                                        <label for="calendar">Select Date</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <div class="available-slots" id="slots-container">
-                                            <!-- Available slots will be populated here -->
+                            <form id="updateProfileForm" action="/user/updateUser" method="post">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="firstname"
+                                                name="firstname" placeholder="First Name" required>
+                                            <label for="firstname">First Name</label>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="lastname"
+                                                name="lastname" placeholder="Last Name" required>
+                                            <label for="lastname">Last Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="licenseNo"
+                                                name="licenseNo" placeholder="License Number" pattern="[A-Za-z0-9]{8}"
+                                                title="8 characters, alphanumeric" required>
+                                            <label for="licenseNo">License Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control border-0 bg-light" id="age"
+                                                name="age" placeholder="Age" min="1" max="120" required>
+                                            <label for="age">Age</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h5>Car Details</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="carMake"
+                                                name="carMake" placeholder="Car Make" required>
+                                            <label for="carMake">Car Make</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="carModel"
+                                                name="carModel" placeholder="Car Model" required>
+                                            <label for="carModel">Car Model</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control border-0 bg-light" id="carYear"
+                                                name="carYear" placeholder="Car Year" min="1886" max="2024" required>
+                                            <label for="carYear">Car Year</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0 bg-light" id="plateNumber"
+                                                name="plateNumber" placeholder="Plate Number" required>
+                                            <label for="plateNumber">Plate Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control border-0 bg-light" id="calendar"
+                                                name="calendar" placeholder="" required
+                                                min="<%= new Date().toISOString().split('T')[0] %>" />
+                                            <label for="calendar">choose a day</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 text-center">
+                                        <button type="submit" id="book-appointment" class="btn btn-primary py-3 px-5">
+                                            Book Appointment
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-12 text-center">
-                                    <button id="book-appointment" class="btn btn-primary py-3 px-5">Book
-                                        Appointment</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
