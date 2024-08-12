@@ -44,7 +44,25 @@ const UserSchema = new mongoose.Schema({
       default: "defaultPlatno",
     },
   },
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
+
+  appointments: {
+    appointment_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appointment",
+    },
+    testType: {
+      type: String,
+      default: "",
+    },
+    isPass: {
+      type: Boolean,
+      default: null,
+    },
+    comment: {
+      type: String,
+      default: "",
+    },
+  },
 });
 
 // Hash the password before saving the user

@@ -27,9 +27,9 @@ exports.renderG2 = async (req, res) => {
 exports.renderG = async (req, res) => {
   try {
     // Find the user by their session ID
-    const user = await User.findById(req.session.userId);
+    const userName = await User.findById(req.session.userId);
     // Render the G page with the user's information
-    res.render("G", { layout: "G", title: "G Test", user: req.session.user });
+    res.render("G", { layout: "G", title: "G Test", userName });
   } catch (err) {
     // If there's an error, send a 500 error message
     res.status(500).send(err.message);

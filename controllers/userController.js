@@ -28,6 +28,44 @@ exports.updateUser = async (req, res) => {
         "car_details.model": carModel,
         "car_details.year": carYear,
         "car_details.platno": plateNumber,
+        "appointments.testType": "G2",
+      },
+      { new: true }
+    );
+
+    if (!userName) {
+      return res.status(404).send("User not found");
+    }
+
+    const appointments = await Appointment.find({
+      _id: { $in: userName.appointments },
+    });
+    // Redirect to profile page or send a response
+    res.render("profile", {
+      layout: "profile",
+      title: "Profile",
+      userName,
+      appointments,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+exports.updateGUser = async (req, res) => {
+  try {
+    const { carMake, carModel, carYear, plateNumber } = req.body;
+
+    // Update user
+    const userName = await User.findByIdAndUpdate(
+      req.session.userId,
+      {
+        "car_details.make": carMake,
+        "car_details.model": carModel,
+        "car_details.year": carYear,
+        "car_details.platno": plateNumber,
+        "appointments.testType": "G",
       },
       { new: true }
     );
