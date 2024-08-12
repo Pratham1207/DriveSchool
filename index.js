@@ -48,6 +48,7 @@ app.use("/auth", require("./routes/authRoutes"));
 app.use("/user", require("./routes/userRoutes"));
 app.use("/", appointmentRoutes);
 app.use("/examiner", examinerRoutes);
+
 app.use("/", g2Routes);
 
 app.listen(PORT, () => {
