@@ -8,6 +8,7 @@ const dbConfig = require("./config/db");
 const sessionConfig = require("./config/session");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const g2Routes = require("./routes/g2Routes");
+const adminRoutes = require("./routes/adminRoutes");
 
 // Express setup
 const app = express();
@@ -46,6 +47,9 @@ app.use("/", require("./routes/viewRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/user", require("./routes/userRoutes"));
 app.use("/", appointmentRoutes);
+
+app.use("/admin", adminRoutes);
+
 app.use("/", g2Routes);
 
 app.listen(PORT, () => {
