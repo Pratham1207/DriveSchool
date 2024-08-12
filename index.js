@@ -9,6 +9,7 @@ const sessionConfig = require("./config/session");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const examinerRoutes = require("./routes/examiner");
 const g2Routes = require("./routes/g2Routes");
+const adminRoutes = require("./routes/adminRoutes");
 
 // Express setup
 const app = express();
@@ -47,8 +48,6 @@ app.use("/", require("./routes/viewRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/user", require("./routes/userRoutes"));
 app.use("/", appointmentRoutes);
-app.use("/examiner", examinerRoutes);
-
 app.use("/", g2Routes);
 
 app.listen(PORT, () => {
