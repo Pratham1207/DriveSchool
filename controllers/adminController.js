@@ -3,7 +3,9 @@ const User = require("../models/User");
 module.exports.renderDashboard = async (req, res) => {
   try {
     // Fetch all users with their appointments
-    const users = await User.find({ appointmentDate: { $exists: true } });
+    const users = await User.find({ userType: "Driver" }).populate(
+      "appointments.appointment_id"
+    );
     res.render("admin/dashboard", {
       layout: "admin/dashboard",
       title: "Dashboard",
@@ -26,7 +28,9 @@ module.exports.viewResults = async (req, res) => {
       query.passFail = false;
     }
 
-    const users = await User.find(query);
+    const users = await User.find({ userType: "Driver" }).populate(
+      "appointments.appointment_id"
+    );
     console.log(users);
     res.render("admin/results", {
       layout: "admin/results",

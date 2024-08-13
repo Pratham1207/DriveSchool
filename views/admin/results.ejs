@@ -50,13 +50,13 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <%= user.testType %>
+                                                                    <%= user.testType=='G' || 'No Test Type' %>
                                                                 </td>
                                                                 <td>
-                                                                    <%= user.passFail ? "Pass" : "Fail" %>
+                                                                    <%= user.isPass==false ? "Fail" : "Pass" %>
                                                                 </td>
                                                                 <td>
-                                                                    <%= user.comment %>
+                                                                    <%= user.comment || 'No Comment' %>
                                                                 </td>
                                                             </tr>
                                                             <% }) %>

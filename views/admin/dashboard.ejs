@@ -59,10 +59,9 @@
                                                                     </td>
                                                                     <td class="font-weight-medium">
                                                                         <div
-                                                                            class="badge 
-                                                                        <%= user.passFail === null ? 'badge-warning' : 
-                                                                             user.passFail ? 'badge-success' : 'badge-danger' %>">
-                                                                            <%= user.passFail ? "Passed" : "Failed" %>
+                                                                            class="badge <%= user.isPass === null ? 'badge-warning' : user.isPass ? 'badge-success' : 'badge-danger' %>">
+                                                                            <%= user.isPass===null ? "Pending" :
+                                                                                user.isPass ? "Passed" : "Failed" %>
                                                                         </div>
                                                                     </td>
                                                                 </tr>

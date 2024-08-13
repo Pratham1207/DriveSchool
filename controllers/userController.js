@@ -93,9 +93,9 @@ exports.updateGUser = async (req, res) => {
     });
 
     // Redirect to profile page or send a response
-    res.render("profile", {
-      layout: "profile",
-      title: "Profile",
+    res.render("G2", {
+      layout: "G2",
+      title: "G2 Test",
       user: updatedUser,
       appointments,
     });
