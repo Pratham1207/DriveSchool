@@ -23,56 +23,124 @@
                                 <div class="col-md-12 grid-margin">
                                     <div class="row">
                                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                            <h3 class="font-weight-bold">Welcome, <%= username %>!</h3>
+                                            <h3 class="font-weight-bold">Welcome, <%=username %>
+                                            </h3>
+                                            <h6 class="font-weight-normal mb-0">All systems are running smoothly!</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-7 grid-margin stretch-card">
+                                <div class="col-md-6 grid-margin stretch-card">
+                                    <div class="card tale-bg">
+                                        <div class="card-people mt-auto">
+                                            <img src="images/dashboard/people.svg" alt="people">
+                                            <div class="weather-info">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h2 class="mb-0 font-weight-normal"><i
+                                                                class="icon-sun mr-2"></i>24<sup>C</sup></h2>
+                                                    </div>
+                                                    <div class="ml-2">
+                                                        <h4 class="location font-weight-normal">Kitchener</h4>
+                                                        <h6 class="font-weight-normal">Ontario</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 grid-margin transparent">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4 stretch-card transparent">
+                                            <div class="card card-tale">
+                                                <div class="card-body">
+                                                    <p class="mb-4">Total Users</p>
+                                                    <p class="fs-30 mb-2">10</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 stretch-card transparent">
+                                            <div class="card card-light-danger">
+                                                <div class="card-body">
+                                                    <p class="mb-4">Booked Appointments</p>
+                                                    <p class="fs-30 mb-2">4</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4 stretch-card transparent">
+                                            <div class="card card-dark-blue">
+                                                <div class="card-body">
+                                                    <p class="mb-4">Total Appointments</p>
+                                                    <p class="fs-30 mb-2">15</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 grid-margin stretch-card">
                                     <div class="card">
                                         <div class="card-body">
-                                            <p class="card-title mb-0">Appointments</p>
+                                            <p class="card-title mb-0">Driver Test Results</p><br>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-borderless">
                                                     <thead>
                                                         <tr>
-                                                            <th>User</th>
+                                                            <th>Driver Name</th>
                                                             <th>Test Type</th>
-                                                            <th>Date</th>
+                                                            <th>Comments</th>
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <% let totalUsers=users.length; %>
-                                                            <% users.forEach(user=> { %>
-                                                                <tr>
-                                                                    <td>
-                                                                        <%= user.firstname %>
-                                                                            <%= user.lastname %>
-                                                                    </td>
-                                                                    <td class="font-weight-bold">
-                                                                        <%= user.testType %>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%= user.appointmentDate %>
-                                                                    </td>
-                                                                    <td class="font-weight-medium">
-                                                                        <div
-                                                                            class="badge <%= user.isPass === null ? 'badge-warning' : user.isPass ? 'badge-success' : 'badge-danger' %>">
-                                                                            <%= user.isPass===null ? "Pending" :
-                                                                                user.isPass ? "Passed" : "Failed" %>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <% }) %>
-                                                                    <tr>
-                                                                        <td colspan="4"
-                                                                            class="font-weight-bold text-right">
-                                                                            Total Users: <%= totalUsers %>
-                                                                        </td>
-                                                                    </tr>
+                                                        <tr>
+                                                            <td>Yashkumar Jagani</td>
+                                                            <td class="font-weight-bold">G2</td>
+                                                            <td>Need more improvement for G2</td>
+                                                            <td class="font-weight-medium">
+                                                                <div class="badge badge-danger">Fail</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Priya Patel</td>
+                                                            <td class="font-weight-bold">G</td>
+                                                            <td>Excellent performance</td>
+                                                            <td class="font-weight-medium">
+                                                                <div class="badge badge-success">Pass</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Rohan Singh</td>
+                                                            <td class="font-weight-bold">G2</td>
+                                                            <td>Improved handling but needs caution at intersections
+                                                            </td>
+                                                            <td class="font-weight-medium">
+                                                                <div class="badge badge-warning">Conditional Pass</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Meera Shah</td>
+                                                            <td class="font-weight-bold">G</td>
+                                                            <td>Confident driving with good speed control</td>
+                                                            <td class="font-weight-medium">
+                                                                <div class="badge badge-success">Pass</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Aman Verma</td>
+                                                            <td class="font-weight-bold">G2</td>
+                                                            <td>Frequent lane deviations, requires practice</td>
+                                                            <td class="font-weight-medium">
+                                                                <div class="badge badge-danger">Fail</div>
+                                                            </td>
+                                                        </tr>
                                                     </tbody>
+                                                </table>
                                                 </table>
                                             </div>
                                         </div>
@@ -81,12 +149,10 @@
                             </div>
 
                         </div>
-                        <%- include ('partials/_footer') -%>
                     </div>
             </div>
-    </div>
 
-    <%- include ('partials/_scripts') -%>
+            <%- include ('partials/_scripts') -%>
 </body>
 
 </html>

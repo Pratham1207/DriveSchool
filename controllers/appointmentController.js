@@ -28,7 +28,7 @@ module.exports.createAppointment = async (req, res) => {
     // Convert the provided date to a Date object and check if it's in the future
     const appointmentDate = new Date(date);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set current time to midnight for comparison
+    today.setHours(0, 0, 0, 0);
     if (appointmentDate < today) {
       return res.render("admin/appointment", {
         layout: "admin/appointment",

@@ -19,6 +19,7 @@ router.post(
   appointmentController.createAppointment
 );
 
+// Get available time slots for a given date
 router.get("/slots/:date", async (req, res) => {
   try {
     const { date } = req.params;

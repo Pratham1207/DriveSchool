@@ -48,7 +48,7 @@ module.exports.addComment = async (req, res) => {
   }
 };
 
-// Example controller function for updating appointments
+// Update appointment status and comment
 exports.updateAppointment = async (req, res) => {
   try {
     const { isPass, comment } = req.body;

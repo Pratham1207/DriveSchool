@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+// View dashboard
 module.exports.renderDashboard = async (req, res) => {
   try {
     // Fetch all users with their appointments
@@ -17,6 +18,7 @@ module.exports.renderDashboard = async (req, res) => {
   }
 };
 
+// View results
 module.exports.viewResults = async (req, res) => {
   try {
     const { filter } = req.query;

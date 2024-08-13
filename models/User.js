@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+// Define the schema for an appointment
 const AppointmentSchema = new mongoose.Schema({
   appointment_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -64,7 +65,6 @@ const UserSchema = new mongoose.Schema({
     },
   },
 
-  // appointments should be an array of AppointmentSchema objects
   appointments: {
     type: [AppointmentSchema],
     default: [],

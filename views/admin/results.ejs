@@ -22,47 +22,84 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h4 class="card-title">Driver Test Results</h4>
-                                            <form action="/admin/results" method="GET" class="mb-3">
-                                                <label for="filter">Filter by:</label>
-                                                <select name="filter" id="filter" class="form-control mb-2">
-                                                    <option value="">All</option>
-                                                    <option value="pass">Pass</option>
-                                                    <option value="fail">Fail</option>
-                                                </select>
-                                                <button type="submit" class="btn btn-primary">Filter</button>
-                                            </form>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>Test Type</th>
-                                                            <th>Status</th>
-                                                            <th>Comment</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <% users.forEach(user=> { %>
-                                                            <tr>
-                                                                <td>
-                                                                    <%= user.firstname %>
-                                                                        <%= user.lastname %>
-                                                                </td>
+                                            <div class="row">
+                                                <div class="col-md-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <p class="card-title mb-0">Appointments</p><br>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-borderless">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Driver Name</th>
+                                                                            <th>Test Type</th>
+                                                                            <th>Comments</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Yashkumar Jagani</td>
+                                                                            <td class="font-weight-bold">G2</td>
+                                                                            <td>Need more improvement for G2</td>
+                                                                            <td class="font-weight-medium">
+                                                                                <div class="badge badge-danger">Fail
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Shivansh Thakar</td>
+                                                                            <td class="font-weight-bold">G</td>
+                                                                            <td>Excellent performance</td>
+                                                                            <td class="font-weight-medium">
+                                                                                <div class="badge badge-success">
+                                                                                    Pass
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Meet Bhakta</td>
+                                                                            <td class="font-weight-bold">G2</td>
+                                                                            <td>Improved handling but needs caution
+                                                                                at
+                                                                                intersections
+                                                                            </td>
+                                                                            <td class="font-weight-medium">
+                                                                                <div class="badge badge-warning">
+                                                                                    Conditional Pass</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Shivam Patel</td>
+                                                                            <td class="font-weight-bold">G</td>
+                                                                            <td>Confident driving with good speed
+                                                                                control</td>
+                                                                            <td class="font-weight-medium">
+                                                                                <div class="badge badge-success">
+                                                                                    Pass
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Jenisha Patel</td>
+                                                                            <td class="font-weight-bold">G2</td>
+                                                                            <td>Frequent lane deviations, requires
+                                                                                practice</td>
+                                                                            <td class="font-weight-medium">
+                                                                                <div class="badge badge-danger">Fail
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
 
-                                                                <td>
-                                                                    <%= user.testType=='G' || 'No Test Type' %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.isPass==false ? "Fail" : "Pass" %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.comment || 'No Comment' %>
-                                                                </td>
-                                                            </tr>
-                                                            <% }) %>
-                                                    </tbody>
-                                                </table>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
