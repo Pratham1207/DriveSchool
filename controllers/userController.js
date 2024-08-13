@@ -16,7 +16,7 @@ exports.updateUser = async (req, res) => {
       plateNumber,
     } = req.body;
 
-    // Update user details and set G2 test type in appointments array
+    // Update user details
     const updatedUser = await User.findByIdAndUpdate(
       req.session.userId,
       {
@@ -28,11 +28,10 @@ exports.updateUser = async (req, res) => {
         "car_details.model": carModel,
         "car_details.year": carYear,
         "car_details.platno": plateNumber,
-        $set: { "appointments.$[elem].testType": "G2" },
       },
       {
         new: true,
-        arrayFilters: [{ "elem.testType": { $exists: true } }],
+        runValidators: true,
       }
     );
 
@@ -40,14 +39,21 @@ exports.updateUser = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
+    // If appointments need to be updated, adjust the logic accordingly
+    const updatedAppointments = await Appointment.updateMany(
+      {
+        _id: { $in: updatedUser.appointments.map((app) => app.appointment_id) },
+      },
+      { $set: { testType: "G2" } }
+    );
+
     const appointments = await Appointment.find({
       _id: { $in: updatedUser.appointments.map((app) => app.appointment_id) },
     });
 
-    // Redirect to G2 test page or send a response
+    // Redirect to the profile page or send a response
     res.render("profile", {
-      layout: "profile",
-      title: "profile",
+      title: "Profile",
       user: updatedUser,
       appointments,
     });
