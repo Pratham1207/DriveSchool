@@ -4,8 +4,8 @@ const Appointment = require("../models/Appointment");
 exports.renderExaminer = async (req, res) => {
   try {
     const testType = req.query.testType || "";
-    const query = testType ? { testType } : {};
-    const appointments = await Appointment.find(query).populate("user");
+    const filter = testType ? { testType: testType } : {};
+    const appointments = await Appointment.find(filter).populate("user");
     res.render("examinerDashboard", {
       layout: "examinerDashboard",
       title: "Examiner Dashboard",
@@ -45,5 +45,34 @@ module.exports.addComment = async (req, res) => {
   } catch (error) {
     console.error("Error adding comment:", error);
     res.status(500).send("Server Error");
+  }
+};
+
+// Example controller function for updating appointments
+exports.updateAppointment = async (req, res) => {
+  try {
+    const { isPass, comment } = req.body;
+    const appointment = await Appointment.findById(req.params.appointmentId);
+    if (!appointment) {
+      return res.status(404).send("Appointment not found");
+    }
+
+    const user = await User.findById(appointment.user);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const userAppointment = user.appointments.id(appointment._id);
+    if (!userAppointment) {
+      return res.status(404).send("User appointment not found");
+    }
+
+    userAppointment.isPass = isPass;
+    userAppointment.comment = comment;
+
+    await user.save();
+    res.send("Appointment updated successfully");
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 };

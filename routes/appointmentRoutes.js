@@ -3,13 +3,21 @@ const express = require("express");
 const router = express.Router();
 const appointmentController = require("../controllers/appointmentController");
 const Appointment = require("../models/Appointment");
-const User = require("../models/User");
+const adminMiddleware = require("../middlewares/adminMiddleware");
 
 // Render the appointment management page
-router.get("/admin/appointment", appointmentController.renderAppointment);
+router.get(
+  "/admin/appointment",
+  adminMiddleware,
+  appointmentController.renderAppointment
+);
 
 // Create an appointment
-router.post("/create-appointment", appointmentController.createAppointment);
+router.post(
+  "/create-appointment",
+  adminMiddleware,
+  appointmentController.createAppointment
+);
 
 router.get("/slots/:date", async (req, res) => {
   try {

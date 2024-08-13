@@ -15,4 +15,7 @@ router.post(
   examinerController.addComment
 );
 
+// Update appointment status and comment
+router.put("/appointment/:appointmentId", examinerController.updateAppointment);
+
 module.exports = router;
