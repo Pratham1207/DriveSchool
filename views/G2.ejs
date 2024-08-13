@@ -58,21 +58,24 @@
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="firstname"
-                                                name="firstname" placeholder="First Name" required>
+                                                name="firstname" value="<%= user.firstname %>" placeholder="First Name"
+                                                required>
                                             <label for="firstname">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="lastname"
-                                                name="lastname" placeholder="Last Name" required>
+                                                name="lastname" value="<%= user.lastname %>" placeholder="Last Name"
+                                                required>
                                             <label for="lastname">Last Name</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="licenseNo"
-                                                name="licenseNo" placeholder="License Number" pattern="[A-Za-z0-9]{8}"
+                                                name="licenseNo" placeholder="License Number"
+                                                value="<%= user.licenseNo %>" pattern="[A-Za-z0-9]{8}"
                                                 title="8 characters, alphanumeric" required>
                                             <label for="licenseNo">License Number</label>
                                         </div>
@@ -80,7 +83,8 @@
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="number" class="form-control border-0 bg-light" id="age"
-                                                name="age" placeholder="Age" min="1" max="120" required>
+                                                name="age" placeholder="Age" value="<%= user.age %>" min="1" max="120"
+                                                required>
                                             <label for="age">Age</label>
                                         </div>
                                     </div>
@@ -90,50 +94,60 @@
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="carMake"
-                                                name="carMake" placeholder="Car Make" required>
+                                                name="carMake" value="<%= user.car_details.make %>"
+                                                placeholder="Car Make" required>
                                             <label for="carMake">Car Make</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="carModel"
-                                                name="carModel" placeholder="Car Model" required>
+                                                name="carModel" value="<%= user.car_details.model %>"
+                                                placeholder="Car Model" required>
                                             <label for="carModel">Car Model</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="number" class="form-control border-0 bg-light" id="carYear"
-                                                name="carYear" placeholder="Car Year" min="1886" max="2024" required>
+                                                name="carYear" value="<%= user.car_details.year %>"
+                                                placeholder="Car Year" min="1886" max="2024" required>
                                             <label for="carYear">Car Year</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="plateNumber"
-                                                name="plateNumber" placeholder="Plate Number" required>
+                                                name="plateNumber" value="<%= user.car_details.platno %>"
+                                                placeholder="Plate Number" required>
                                             <label for="plateNumber">Plate Number</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="date" class="form-control border-0 bg-light" id="calendar"
-                                                name="calendar" placeholder="" required
+                                                name="calendar" placeholder="Select Date" required
                                                 min="<%= new Date().toISOString().split('T')[0] %>" />
-                                            <label for="calendar">choose a day</label>
+                                            <label for="calendar">Select Date</label>
                                         </div>
                                     </div>
-
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <div class="available-slots" id="slots-container">
+                                                <!-- Available slots will be populated here dynamically -->
+                                            </div>
+                                        </div>
+                                    </div><br>
                                     <div class="col-12 text-center">
-                                        <button type="submit" id="book-appointment" class="btn btn-primary py-3 px-5">
-                                            Book Appointment
-                                        </button>
+                                        <button id="book-appointment" class="btn btn-primary py-3 px-5">Book
+                                            Appointment</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <!-- G2 Booking End -->
 
@@ -142,7 +156,7 @@
 
                 <!-- JavaScript Libraries -->
                 <%- include('layouts/script') -%>
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
                     <script>
                         $(document).ready(function () {
@@ -198,7 +212,9 @@
                                 });
                             }
                         });
-                    </script>
+                    </script> -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script src="js/booking.js"></script>
     </body>
 
 </html>

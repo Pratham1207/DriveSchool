@@ -48,14 +48,14 @@ exports.renderRegister = (req, res) => {
 
 // Render the profile page
 module.exports.renderProfile = async (req, res) => {
-  const userId = req.session.userId || "testUserId";
+  const userId = req.session.userId;
   const userName = await User.findById(req.session.userId);
   const user = await User.findById(userId).populate("appointments");
   res.render("profile", {
     layout: "profile",
     title: "Profile",
     userName,
-    appointments: user.appointments,
+    user,
   });
 };
 

@@ -7,8 +7,8 @@ const expressLayouts = require("express-ejs-layouts");
 const dbConfig = require("./config/db");
 const sessionConfig = require("./config/session");
 const appointmentRoutes = require("./routes/appointmentRoutes");
-const examinerRoutes = require("./routes/examiner");
-const g2Routes = require("./routes/g2Routes");
+const examinerRoutes = require("./routes/examinerRoute");
+const adminRoutes = require("./routes/adminRoutes");
 
 // Express setup
 const app = express();
@@ -16,8 +16,8 @@ const app = express();
 const PORT = process.env.PORT || 4019;
 
 // View engine setup
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "/views"));
 app.use(express.static("public"));
 app.use(expressLayouts);
 app.set("layout", "layouts/navbar");
@@ -47,9 +47,9 @@ app.use("/", require("./routes/viewRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/user", require("./routes/userRoutes"));
 app.use("/", appointmentRoutes);
-app.use("/examiner", examinerRoutes);
-
-app.use("/", g2Routes);
+app.use("/g2", appointmentRoutes);
+app.use("/admin", adminRoutes);
+app.use("/", examinerRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

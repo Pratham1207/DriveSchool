@@ -32,8 +32,13 @@ exports.login = async (req, res) => {
     // Store the user ID and user type in the session
     req.session.userId = user._id;
     req.session.userType = user.userType;
-    // Redirect to the home page
-    res.redirect("/");
+    if (user.userType === "Admin") {
+      // Redirect to the admin dashboard
+      res.redirect("/admin");
+    } else {
+      // Redirect to the home page
+      res.redirect("/");
+    }
   } catch (err) {
     // Handle login errors
     res.status(400).send(err.message);

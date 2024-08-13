@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 // Database connection
 const dbConfig = () => {
   const dbURI =
-    process.env.MONGO_URI ||
-    "mongodb+srv://admin:root123@test.dxddbd2.mongodb.net/?retryWrites=true&w=majority&appName=test";
+    process.env.MONGO_URI || "mongodb://localhost:27017/DriveSystem";
 
   mongoose
     .connect(dbURI, {

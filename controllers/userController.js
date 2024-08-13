@@ -1,8 +1,8 @@
-// Import User model
+// Import User and Appointment models
 const User = require("../models/User");
 const Appointment = require("../models/Appointment");
 
-// Update user's details
+// Update user's details for G2 Test
 exports.updateUser = async (req, res) => {
   try {
     const {
@@ -16,8 +16,8 @@ exports.updateUser = async (req, res) => {
       plateNumber,
     } = req.body;
 
-    // Update user
-    const userName = await User.findByIdAndUpdate(
+    // Update user details and set G2 test type in appointments array
+    const updatedUser = await User.findByIdAndUpdate(
       req.session.userId,
       {
         firstname,
@@ -28,23 +28,27 @@ exports.updateUser = async (req, res) => {
         "car_details.model": carModel,
         "car_details.year": carYear,
         "car_details.platno": plateNumber,
-        "appointments.testType": "G2",
+        $set: { "appointments.$[elem].testType": "G2" },
       },
-      { new: true }
+      {
+        new: true,
+        arrayFilters: [{ "elem.testType": { $exists: true } }],
+      }
     );
 
-    if (!userName) {
+    if (!updatedUser) {
       return res.status(404).send("User not found");
     }
 
     const appointments = await Appointment.find({
-      _id: { $in: userName.appointments },
+      _id: { $in: updatedUser.appointments.map((app) => app.appointment_id) },
     });
-    // Redirect to profile page or send a response
+
+    // Redirect to G2 test page or send a response
     res.render("profile", {
       layout: "profile",
-      title: "Profile",
-      userName,
+      title: "profile",
+      user: updatedUser,
       appointments,
     });
   } catch (err) {
@@ -53,35 +57,40 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+// Update user's details for G Test
 exports.updateGUser = async (req, res) => {
   try {
     const { carMake, carModel, carYear, plateNumber } = req.body;
 
-    // Update user
-    const userName = await User.findByIdAndUpdate(
+    // Update user details and set G test type in appointments array
+    const updatedUser = await User.findByIdAndUpdate(
       req.session.userId,
       {
         "car_details.make": carMake,
         "car_details.model": carModel,
         "car_details.year": carYear,
         "car_details.platno": plateNumber,
-        "appointments.testType": "G",
+        $set: { "appointments.$[elem].testType": "G" },
       },
-      { new: true }
+      {
+        new: true,
+        arrayFilters: [{ "elem.testType": { $exists: true } }],
+      }
     );
 
-    if (!userName) {
+    if (!updatedUser) {
       return res.status(404).send("User not found");
     }
 
     const appointments = await Appointment.find({
-      _id: { $in: userName.appointments },
+      _id: { $in: updatedUser.appointments.map((app) => app.appointment_id) },
     });
+
     // Redirect to profile page or send a response
     res.render("profile", {
       layout: "profile",
       title: "Profile",
-      userName,
+      user: updatedUser,
       appointments,
     });
   } catch (err) {
@@ -100,7 +109,7 @@ exports.getUser = async (req, res) => {
 
     // Fetch user's appointments
     const appointments = await Appointment.find({
-      _id: { $in: user.appointments },
+      _id: { $in: user.appointments.map((app) => app.appointment_id) },
     });
 
     // Send user data and appointments as JSON

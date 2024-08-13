@@ -1,18 +1,27 @@
 const mongoose = require("mongoose");
 
-// Define the schema for an appointment
 const appointmentSchema = new mongoose.Schema({
   date: {
-    type: String,
+    type: Date,
     required: true,
   },
   time: {
     type: String,
     required: true,
   },
+  testType: {
+    type: String,
+    enum: ["G", "G2"],
+    required: true,
+  },
   isTimeSlotAvailable: {
     type: Boolean,
     default: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 

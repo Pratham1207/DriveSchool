@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examiner Dashboard</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
+</head>
+
+<body>
+    <h1>Examiner Dashboard</h1>
+
+    <!-- Filter Form -->
+    <form method="get" action="/examinerDashboard">
+        <label for="testType">Filter by Test Type:</label>
+        <select name="testType" id="testType">
+            <option value="">All</option>
+            <option value="G" <%=testType==='G' ? 'selected' : '' %>>G</option>
+            <option value="G2" <%=testType==='G2' ? 'selected' : '' %>>G2</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Appointments Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Test Type</th>
+                <th>Appointment Date</th>
+                <th>Pass/Fail</th>
+                <th>Comments</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (appointments.length> 0) { %>
+                <% appointments.forEach(appointment=> { %>
+                    <tr>
+                        <td>
+                            <%= appointment.user ? appointment.user.firstname : 'N/A' %>
+                        </td>
+                        <td>
+                            <%= appointment.user ? appointment.user.lastname : 'N/A' %>
+                        </td>
+                        <td>
+                            <%= appointment.testType %>
+                        </td>
+                        <td>
+                            <%= new Date(appointment.date).toDateString() %>
+                        </td>
+                        <td>
+                            <%= appointment.passFail ? 'Pass' : 'Fail' %>
+                        </td>
+                        <td>
+                            <%= appointment.comment || 'No comment' %>
+                        </td>
+                        <td>
+                            <form action="/addcomment" method="post">
+                                <input type="hidden" name="appointmentId" value="<%= appointment._id %>">
+                                <textarea name="comment" placeholder="Add comment" required></textarea>
+                                <select name="isPass" required>
+                                    <option value="true" <%=appointment.passFail ? 'selected' : '' %>>Pass</option>
+                                    <option value="false" <%=!appointment.passFail ? 'selected' : '' %>>Fail</option>
+                                </select>
+                                <button type="submit">Submit</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="7">No appointments found.</td>
+                            </tr>
+                            <% } %>
+        </tbody>
+    </table>
+
+    <script src="/path/to/your/scripts.js"></script>
+</body>
+
+</html>

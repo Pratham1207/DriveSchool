@@ -1,6 +1,25 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const AppointmentSchema = new mongoose.Schema({
+  appointment_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Appointment",
+  },
+  testType: {
+    type: String,
+    default: "",
+  },
+  isPass: {
+    type: Boolean,
+    default: null,
+  },
+  comment: {
+    type: String,
+    default: "",
+  },
+});
+
 // Define the schema for a user
 const UserSchema = new mongoose.Schema({
   username: {
@@ -45,23 +64,10 @@ const UserSchema = new mongoose.Schema({
     },
   },
 
+  // appointments should be an array of AppointmentSchema objects
   appointments: {
-    appointment_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Appointment",
-    },
-    testType: {
-      type: String,
-      default: "",
-    },
-    isPass: {
-      type: Boolean,
-      default: null,
-    },
-    comment: {
-      type: String,
-      default: "",
-    },
+    type: [AppointmentSchema],
+    default: [],
   },
 });
 
